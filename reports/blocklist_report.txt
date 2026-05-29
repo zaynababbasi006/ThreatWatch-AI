@@ -1,0 +1,48 @@
+============================================================
+  THREATWATCH AI — BLOCKLIST REPORT
+  Generated: 2026-05-29 16:25:14
+  Total Active Blocks: 6
+============================================================
+
+IP: 192.168.1.105
+  Blocked At  : 2026-05-28 12:30:33
+  Reason      : DDoS Attack
+  Risk Score  : 92
+  Block Count : 20
+  Status      : ACTIVE
+
+IP: 172.16.8.22
+  Blocked At  : 2026-05-28 12:30:33
+  Reason      : SQL Injection
+  Risk Score  : 78
+  Block Count : 20
+  Status      : ACTIVE
+
+IP: 192.168.1.200
+  Blocked At  : 2026-05-28 12:34:31
+  Reason      : Ransomware
+  Risk Score  : 100
+  Block Count : 16
+  Status      : ACTIVE
+
+IP: 192.168.221.128
+  Blocked At  : 2026-05-28 20:54:59
+  Reason      : Brute Force Login (Hydra)
+  Risk Score  : 85
+  Block Count : 8
+  Status      : ACTIVE
+
+IP: 159.31.24.96
+  Blocked At  : 2026-05-29 16:23:28
+  Reason      : DDoS Attack
+  Risk Score  : 85
+  Block Count : 4
+  Status      : ACTIVE
+
+IP: 159.52.240.231
+  Blocked At  : 2026-05-29 16:23:30
+  Reason      : DDoS Attack
+  Risk Score  : 85
+  Block Count : 4
+  Status      : ACTIVE
+

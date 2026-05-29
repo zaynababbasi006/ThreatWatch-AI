@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ThreatWatch AI — Autonomous Cyber Defense System
 ### STMU | Department of Computing | BSCYS-III
 ### Course: CS2141 — Artificial Intelligence
@@ -144,3 +145,7 @@ This trains the Random Forest model and tests it on new network traffic.
 ---
 
 *ThreatWatch AI v1.0 | STMU BSCYS-III | May 2026*
+=======
+# ThreatWatch-AI
+Autonomous Cyber Defense System — AI/ML Project STMU BSCYS-III
+>>>>>>> 5108e20a3b955a3bf128933b6301ba4f2d6ac573

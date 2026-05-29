@@ -1,0 +1,52 @@
+{
+    "192.168.1.105": {
+        "blocked_at": "2026-05-28 12:30:33",
+        "reason": "DDoS Attack",
+        "risk_score": 92,
+        "block_count": 20,
+        "status": "ACTIVE"
+    },
+    "172.16.8.22": {
+        "blocked_at": "2026-05-28 12:30:33",
+        "reason": "SQL Injection",
+        "risk_score": 78,
+        "block_count": 20,
+        "status": "ACTIVE"
+    },
+    "192.168.1.200": {
+        "blocked_at": "2026-05-28 12:34:31",
+        "reason": "Ransomware",
+        "risk_score": 100,
+        "block_count": 16,
+        "status": "ACTIVE"
+    },
+    "192.168.221.128": {
+        "blocked_at": "2026-05-28 20:54:59",
+        "reason": "Brute Force Login (Hydra)",
+        "risk_score": 85,
+        "block_count": 8,
+        "status": "ACTIVE"
+    },
+    "159.31.24.96": {
+        "blocked_at": "2026-05-29 16:23:28",
+        "reason": "DDoS Attack",
+        "risk_score": 85,
+        "block_count": 4,
+        "status": "ACTIVE"
+    },
+    "159.52.240.231": {
+        "blocked_at": "2026-05-29 16:23:30",
+        "reason": "DDoS Attack",
+        "risk_score": 85,
+        "block_count": 4,
+        "status": "ACTIVE"
+    },
+    "242.93.97.12": {
+        "blocked_at": "2026-05-29 16:23:33",
+        "reason": "DDoS Attack",
+        "risk_score": 85,
+        "block_count": 4,
+        "status": "UNBLOCKED",
+        "unblocked_at": "2026-05-29 16:25:09"
+    }
+}

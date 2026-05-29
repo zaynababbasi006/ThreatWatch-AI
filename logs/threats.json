@@ -222,5 +222,26 @@
         "threat_type": "Phishing",
         "risk_score": 55,
         "action_taken": "Alert Sent"
+    },
+    {
+        "timestamp": "2026-05-29 16:23:28",
+        "ip_address": "159.31.24.96",
+        "threat_type": "DDoS Attack",
+        "risk_score": 85,
+        "action_taken": "IP Blocked"
+    },
+    {
+        "timestamp": "2026-05-29 16:23:30",
+        "ip_address": "159.52.240.231",
+        "threat_type": "DDoS Attack",
+        "risk_score": 85,
+        "action_taken": "IP Blocked"
+    },
+    {
+        "timestamp": "2026-05-29 16:23:33",
+        "ip_address": "242.93.97.12",
+        "threat_type": "DDoS Attack",
+        "risk_score": 85,
+        "action_taken": "IP Blocked"
     }
 ]
