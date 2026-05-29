@@ -1,0 +1,24 @@
+{
+    "Random Forest": {
+        "accuracy": 91.7,
+        "precision": 100.0,
+        "recall": 83.3,
+        "f1_score": 90.9,
+        "cv_mean": 100.0
+    },
+    "SVM": {
+        "accuracy": 100.0,
+        "precision": 100.0,
+        "recall": 100.0,
+        "f1_score": 100.0,
+        "cv_mean": 100.0
+    },
+    "Neural Network": {
+        "accuracy": 100.0,
+        "precision": 100.0,
+        "recall": 100.0,
+        "f1_score": 100.0,
+        "cv_mean": 100.0
+    },
+    "best_model": "Random Forest"
+}

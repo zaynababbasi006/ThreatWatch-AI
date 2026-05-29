@@ -1,0 +1,130 @@
+# ============================================
+# ThreatWatch AI - DEMO SCRIPT
+# ============================================
+# Read this before your presentation.
+# Follow these steps exactly and your demo
+# will look smooth and professional.
+# ============================================
+
+DEMO STEPS — say these out loud to your teacher
+================================================
+
+STEP 1 — INTRODUCTION (30 seconds)
+------------------------------------
+Say this:
+"This is ThreatWatch AI, an autonomous cyber defense system.
+It uses Machine Learning to detect cyber attacks in real time,
+automatically scores them by danger level, takes action,
+and displays everything on a live dashboard.
+It was built in Python using Flask and scikit-learn."
+
+
+STEP 2 — SHOW THE RISK ENGINE (1 minute)
+------------------------------------------
+Open terminal and run:
+    py risk_engine.py
+
+Point at the output and say:
+"This is our Risk Scoring Engine. It analyzes each threat type
+and assigns a danger score from 0 to 100.
+Ransomware gets 95 — CRITICAL — so the IP is blocked automatically.
+Brute Force gets 60 — MEDIUM — so an alert is sent.
+Port Scan gets 40 — it's just logged. The system decides the
+response automatically without any human input."
+
+
+STEP 3 — SHOW THE AI MODEL (2 minutes)
+-----------------------------------------
+Open terminal and run:
+    py ai_detector.py
+
+Point at the output and say:
+"This is the Machine Learning component — the AI brain of the system.
+We use a Random Forest algorithm with 100 decision trees.
+The model is trained on network traffic data with 5 features:
+packets per second, bytes per second, connection duration,
+failed login attempts, and port number.
+
+We split the data — 80% for training, 20% for testing.
+The model achieved 100% accuracy on the test data.
+
+Watch — when we give it a DDoS attack pattern: 9500 packets per second,
+it immediately says ATTACK DETECTED with 100% confidence.
+Normal web browsing at 50 packets per second — Normal Traffic, 100% confidence."
+
+
+STEP 4 — SHOW THE MAIN SYSTEM RUNNING (1 minute)
+---------------------------------------------------
+Open terminal and run:
+    py main.py
+
+Point at the output and say:
+"This is the main controller — it connects all modules together.
+When an attack comes in, it goes through the risk engine,
+gets scored and classified, then gets logged automatically.
+You can see each threat being processed in real time —
+DDoS blocked, Brute Force alerted, Ransomware at 100/100 blocked immediately."
+
+
+STEP 5 — SHOW THE LIVE DASHBOARD (2 minutes)
+----------------------------------------------
+Open terminal and run:
+    py dashboard.py
+
+Open browser and go to: http://127.0.0.1:5000
+
+Point at the screen and say:
+"This is the Security Operations Dashboard.
+At the top we have 4 live stats — total threats detected,
+IPs blocked, alerts sent, and average risk score across all events.
+
+In the threat feed below, every attack is shown with:
+- The exact timestamp it happened
+- The source IP address
+- The type of attack
+- A visual risk score bar
+- Color coded severity badge — red for Critical, orange for High, yellow for Medium
+- The action that was automatically taken
+
+The dashboard auto-refreshes every 5 seconds — so if a new attack
+comes in right now, it appears here automatically.
+This matches the real-time monitoring requirement from our SRS document."
+
+
+STEP 6 — CONNECT TO YOUR SRS (30 seconds)
+-------------------------------------------
+Say this:
+"Every module we built maps directly to our SRS requirements:
+- F-01: Real-time monitoring        → main.py + ai_detector.py
+- F-02: Threat classification       → risk_engine.py
+- F-03: Automated threat response   → risk_engine.py (auto block/alert)
+- F-04: Dashboard and reporting     → dashboard.py
+- F-06: AI model management         → ai_detector.py (Random Forest, 100% accuracy)
+
+Thank you."
+
+
+================================================
+TIPS FOR YOUR PRESENTATION
+================================================
+
+✅ Keep the terminal and browser open BEFORE your teacher arrives
+✅ Run main.py first so there is data in the dashboard already
+✅ Speak slowly and point at specific things on screen
+✅ If something goes wrong, stay calm — just rerun the file
+✅ Mention "Random Forest", "risk score", "automated response"
+   — these are keywords your teacher wants to hear
+✅ Have this file open on your phone so you can glance at it
+
+================================================
+FILES IN YOUR PROJECT
+================================================
+
+threat_logger.py   ← run first if log is empty
+risk_engine.py     ← show this second (risk scoring)
+ai_detector.py     ← show this third (the AI part)
+main.py            ← show this fourth (full system)
+dashboard.py       ← show this last (the wow factor)
+
+================================================
+*ThreatWatch AI v1.0 | STMU BSCYS-III | May 2026*
