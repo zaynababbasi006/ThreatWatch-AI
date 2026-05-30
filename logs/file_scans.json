@@ -1,0 +1,22 @@
+[
+    {
+        "filename": "test_malware_sample.txt",
+        "filesize": 190,
+        "extension": ".txt",
+        "entropy": 4.75,
+        "risk_score": 100,
+        "verdict": "CRITICAL",
+        "threats": [
+            "RANSOMWARE signature detected",
+            "RANSOMWARE signature detected",
+            "RANSOMWARE signature detected",
+            "RANSOMWARE signature detected",
+            "MALWARE signature detected",
+            "MALWARE signature detected",
+            "MALWARE signature detected"
+        ],
+        "md5": "6f9faa1869474de61ffd55ef4d2fb6bc",
+        "sha256": "3869ea4208f3534fba8e6c3c8f7e2dcb6c5a16f1247b901f019959549208cf25",
+        "scanned_at": "2026-05-29 16:33:52"
+    }
+]

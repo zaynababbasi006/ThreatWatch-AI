@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_cb5e15f3300754ab7909056dbe048e2b {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+    <div style="
+        position: fixed; bottom: 30px; left: 30px; z-index: 1000;
+        background: rgba(13,27,42,0.95); border: 1px solid #1a3a5c;
+        border-radius: 10px; padding: 16px; font-family: 'Courier New', monospace;
+        min-width: 220px; box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    ">
+        <div style="color:#00ff88;font-size:14px;font-weight:bold;margin-bottom:12px;letter-spacing:2px">
+            🛡 THREATWATCH AI
+        </div>
+        <div style="color:#aaa;font-size:11px;margin-bottom:10px">LIVE ATTACK MAP</div>
+        <div style="margin-bottom:8px">
+            <span style="color:#ff0000">●</span> <span style="color:#e0e0e0;font-size:11px">CRITICAL (90-100)</span>
+        </div>
+        <div style="margin-bottom:8px">
+            <span style="color:#ff6600">●</span> <span style="color:#e0e0e0;font-size:11px">HIGH (70-89)</span>
+        </div>
+        <div style="margin-bottom:8px">
+            <span style="color:#ffcc00">●</span> <span style="color:#e0e0e0;font-size:11px">MEDIUM (40-69)</span>
+        </div>
+        <div style="margin-bottom:14px">
+            <span style="color:#00ff88">●</span> <span style="color:#e0e0e0;font-size:11px">LOW (0-39)</span>
+        </div>
+        <div style="border-top:1px solid #1a3a5c;padding-top:10px">
+            <div style="color:#00aaff;font-size:12px">Total Attacks: <b style="color:#fff">41</b></div>
+            <div style="color:#ff0000;font-size:12px">Critical: <b style="color:#fff">6</b></div>
+            <div style="color:#ff6600;font-size:12px">High: <b style="color:#fff">16</b></div>
+            <div style="color:#ff4444;font-size:12px">IPs Blocked: <b style="color:#fff">22</b></div>
+            <div style="color:#666;font-size:10px;margin-top:8px">
+                Generated: 2026-05-30 17:00
+            </div>
+        </div>
+    </div>
+    
+    
+    <div style="
+        position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+        z-index: 1000; background: rgba(13,27,42,0.95);
+        border: 1px solid #00ff88; border-radius: 8px;
+        padding: 10px 24px; font-family: 'Courier New', monospace;
+        text-align: center;
+    ">
+        <span style="color:#00ff88;font-size:15px;letter-spacing:3px;font-weight:bold">
+            🛡 THREATWATCH AI — LIVE GLOBAL ATTACK MAP
+        </span>
+        <div style="color:#666;font-size:10px;margin-top:4px">
+            Click any dot for attack details • Lines show attack origin → target
+        </div>
+    </div>
+    
+    
+            <div class="folium-map" id="map_cb5e15f3300754ab7909056dbe048e2b" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_cb5e15f3300754ab7909056dbe048e2b = L.map(
+                "map_cb5e15f3300754ab7909056dbe048e2b",
+                {
+                    center: [20.0, 0.0],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 2,
+  "zoomControl": true,
+  "preferCanvas": true,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_15d82e32c23728aae7f6490aa8c0719b = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_15d82e32c23728aae7f6490aa8c0719b.addTo(map_cb5e15f3300754ab7909056dbe048e2b);
+        
+    
+            var marker_3e35b6c73f2d243adf314b21dde41527 = L.marker(
+                [33.6844, 73.0479],
+                {
+}
+            ).addTo(map_cb5e15f3300754ab7909056dbe048e2b);
+        
+    
+            var icon_1771c2e752298e43b04ae96b8021fc0b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "shield",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e5ada091b79410b4cd114c3663a30bc6 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_85b9039ca3c92334578d5b3c40e5db62 = $(`<div id="html_85b9039ca3c92334578d5b3c40e5db62" style="width: 100.0%; height: 100.0%;">             <div style='font-family:monospace;background:#0d1b2a;color:#00ff88;padding:10px;border-radius:6px;min-width:200px'>                 <b style='color:#00ff88'>🛡 ThreatWatch AI — STMU</b><br>                 <span style='color:#aaa'>Protected System</span><br>                 <span style='color:#00aaff'>Islamabad, Pakistan</span>             </div>         </div>`)[0];
+                popup_e5ada091b79410b4cd114c3663a30bc6.setContent(html_85b9039ca3c92334578d5b3c40e5db62);
+            
+        
+
+        marker_3e35b6c73f2d243adf314b21dde41527.bindPopup(popup_e5ada091b79410b4cd114c3663a30bc6)
+        ;
+
+        
+    
+    
+                marker_3e35b6c73f2d243adf314b21dde41527.setIcon(icon_1771c2e752298e43b04ae96b8021fc0b);
+            
+    
+            var circle_marker_5eb23930aef06cf50bd54332e27926cf = L.circleMarker(
+                [55.7558, 37.6173],
+                {"bubblingMouseEvents": true, "color": "#ff0000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff0000", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 2}
+            ).addTo(map_cb5e15f3300754ab7909056dbe048e2b);
+        
+    
+        var popup_b2982e7ed0b3cca4082d136091e67ab0 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_26cd522e7c13590b2feb87e87bcc69c1 = $(`<div id="html_26cd522e7c13590b2feb87e87bcc69c1" style="width: 100.0%; height: 100.0%;">                 <div style='font-family:monospace;background:#0d1b2a;color:#e0e0e0;padding:12px;border-radius:6px;min-width:220px;border:1px solid #ff0000'>                     <b style='color:#ff0000'>🇷🇺 Moscow, Russia</b><br><br>                     <span style='color:#aaa'>Attacker IP:</span> <span style='color:#00aaff'>192.168.1.105</span><br>                     <span style='color:#aaa'>Attacks:</span> <span style='color:#ff0000'>6</span><br>                     <span style='color:#aaa'>Max Score:</span> <span style='color:#ff0000'>92/100</span><br>                     <span style='color:#aaa'>Severity:</span> <span style='color:#ff0000'>CRITICAL</span><br>                     <span style='color:#aaa'>Types:</span> DDoS Attack                 </div>             </div>`)[0];
+                popup_b2982e7ed0b3cca4082d136091e67ab0.setContent(html_26cd522e7c13590b2feb87e87bcc69c1);
+            
+        
+
+        circle_marker_5eb23930aef06cf50bd54332e27926cf.bindPopup(popup_b2982e7ed0b3cca4082d136091e67ab0)
+        ;
+
+        
+    
+    
+            circle_marker_5eb23930aef06cf50bd54332e27926cf.bindTooltip(
+                `<div>
+                     🇷🇺 Russia — CRITICAL (6 attacks)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_c5b1df96e5f3861a8d8346fbf550c6c3 = L.polyline(
+                [[55.7558, 37.6173], [33.6844, 73.0479]],
+                {"bubblingMouseEvents": true, "color": "#ff0000", "dashArray": "5 5", "dashOffset": null, "fill": false, "fillColor": "#ff0000", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.5, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_cb5e15f3300754ab7909056dbe048e2b);
+        
+    
+            var circle_marker_3dadde22067951e4f3993dd4e58a2192 = L.circleMarker(
+                [40.7128, -74.006],
+                {"bubblingMouseEvents": true, "color": "#ffcc00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffcc00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 2}
+            ).addTo(map_cb5e15f3300754ab7909056dbe048e2b);
+        
+    
+        var popup_41513341f15920cf8b10580511a32ab2 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_098fa2ad2127b0f939da63cc05b7b727 = $(`<div id="html_098fa2ad2127b0f939da63cc05b7b727" style="width: 100.0%; height: 100.0%;">                 <div style='font-family:monospace;background:#0d1b2a;color:#e0e0e0;padding:12px;border-radius:6px;min-width:220px;border:1px solid #ffcc00'>                     <b style='color:#ffcc00'>🇺🇸 New York, United States</b><br><br>                     <span style='color:#aaa'>Attacker IP:</span> <span style='color:#00aaff'>10.0.0.44</span><br>                     <span style='color:#aaa'>Attacks:</span> <span style='color:#ffcc00'>6</span><br>                     <span style='color:#aaa'>Max Score:</span> <span style='color:#ffcc00'>65/100</span><br>                     <span style='color:#aaa'>Severity:</span> <span style='color:#ffcc00'>MEDIUM</span><br>                     <span style='color:#aaa'>Types:</span> Brute Force Login                 </div>             </div>`)[0];
+                popup_41513341f15920cf8b10580511a32ab2.setContent(html_098fa2ad2127b0f939da63cc05b7b727);
+            
+        
+
+        circle_marker_3dadde22067951e4f3993dd4e58a2192.bindPopup(popup_41513341f15920cf8b10580511a32ab2)
+        ;
+
+        
+    
+    
+            circle_marker_3dadde22067951e4f3993dd4e58a2192.bindTooltip(
+                `<div>
+                     🇺🇸 United States — MEDIUM (6 attacks)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_98075fd295261e959817047e01b69ea7 = L.polyline(
+                [[40.7128, -74.006], [33.6844, 73.0479]],
+                {"bubblingMouseEvents": true, "color": "#ffcc00", "dashArray": "5 5", "dashOffset": null, "fill": false, "fillColor": "#ffcc00", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.5, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_cb5e15f3300754ab7909056dbe048e2b);
+        
+    
+            var circle_marker_76e5a14175d065b11c2d5b9c5d12cc9c = L.circleMarker(
+                [39.9042, 116.4074],
+                {"bubblingMouseEvents": true, "color": "#ff6600", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff6600", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20, "stroke": true, "weight": 2}
+            ).addTo(map_cb5e15f3300754ab7909056dbe048e2b);
+        
+    
+        var popup_55397abf6631e82520359e7ea7433528 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_3ba2e7a42cc38b54c9f1b59b9dac6dc2 = $(`<div id="html_3ba2e7a42cc38b54c9f1b59b9dac6dc2" style="width: 100.0%; height: 100.0%;">                 <div style='font-family:monospace;background:#0d1b2a;color:#e0e0e0;padding:12px;border-radius:6px;min-width:220px;border:1px solid #ff6600'>                     <b style='color:#ff6600'>🇨🇳 Beijing, China</b><br><br>                     <span style='color:#aaa'>Attacker IP:</span> <span style='color:#00aaff'>172.16.8.22</span><br>                     <span style='color:#aaa'>Attacks:</span> <span style='color:#ff6600'>6</span><br>                     <span style='color:#aaa'>Max Score:</span> <span style='color:#ff6600'>78/100</span><br>                     <span style='color:#aaa'>Severity:</span> <span style='color:#ff6600'>HIGH</span><br>                     <span style='color:#aaa'>Types:</span> SQL Injection                 </div>             </div>`)[0];
+                popup_55397abf6631e82520359e7ea7433528.setContent(html_3ba2e7a42cc38b54c9f1b59b9dac6dc2);
+            
+        
+
+        circle_marker_76e5a14175d065b11c2d5b9c5d12cc9c.bindPopup(popup_55397abf6631e82520359e7ea7433528)
+        ;
+
+        
+    
+    
+            circle_marker_76e5a14175d065b11c2d5b9c5d12cc9c.bindTooltip(
+                `<div>
+                     🇨🇳 China — HIGH (6 attacks)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_964105656c412c7adcdaf91531f9052e = L.polyline(
+                [[39.9042, 116.4074], [33.6844, 73.0479]],
+                {"bubblingMouseEvents": true, "color": "#ff6600", "dashArray": "5 5", "dashOffset": null, "fill": false, "fillColor": "#ff6600", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.5, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_cb5e15f3300754ab7909056dbe048e2b);
+        
+    
+            var circle_marker_99bb03ebf11dce258a65f04428249697 = L.circleMarker(
+                [39.0194, 125.7381],
+                {"bubblingMouseEvents": true, "color": "#ff0000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff0000", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 2}
+            ).addTo(map_cb5e15f3300754ab7909056dbe048e2b);
+        
+    
+        var popup_bfdd55ae07992b0892d9ba81c720eb55 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_234db60393e8715d5194142bb5a1387d = $(`<div id="html_234db60393e8715d5194142bb5a1387d" style="width: 100.0%; height: 100.0%;">                 <div style='font-family:monospace;background:#0d1b2a;color:#e0e0e0;padding:12px;border-radius:6px;min-width:220px;border:1px solid #ff0000'>                     <b style='color:#ff0000'>🇰🇵 Pyongyang, North Korea</b><br><br>                     <span style='color:#aaa'>Attacker IP:</span> <span style='color:#00aaff'>192.168.1.200</span><br>                     <span style='color:#aaa'>Attacks:</span> <span style='color:#ff0000'>5</span><br>                     <span style='color:#aaa'>Max Score:</span> <span style='color:#ff0000'>100/100</span><br>                     <span style='color:#aaa'>Severity:</span> <span style='color:#ff0000'>CRITICAL</span><br>                     <span style='color:#aaa'>Types:</span> Ransomware                 </div>             </div>`)[0];
+                popup_bfdd55ae07992b0892d9ba81c720eb55.setContent(html_234db60393e8715d5194142bb5a1387d);
+            
+        
+
+        circle_marker_99bb03ebf11dce258a65f04428249697.bindPopup(popup_bfdd55ae07992b0892d9ba81c720eb55)
+        ;
+
+        
+    
+    
+            circle_marker_99bb03ebf11dce258a65f04428249697.bindTooltip(
+                `<div>
+                     🇰🇵 North Korea — CRITICAL (5 attacks)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_8a203382cc73732cacb471bd8fe5a95b = L.polyline(
+                [[39.0194, 125.7381], [33.6844, 73.0479]],
+                {"bubblingMouseEvents": true, "color": "#ff0000", "dashArray": "5 5", "dashOffset": null, "fill": false, "fillColor": "#ff0000", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.5, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_cb5e15f3300754ab7909056dbe048e2b);
+        
+    
+            var circle_marker_502aa6971393d28d9e3a74baf7925904 = L.circleMarker(
+                [35.6892, 51.389],
+                {"bubblingMouseEvents": true, "color": "#ffcc00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffcc00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 2}
+            ).addTo(map_cb5e15f3300754ab7909056dbe048e2b);
+        
+    
+        var popup_09e919f0564a004ff7e5220456af473e = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_dd0f9f7ad5d3ccb8de3c96b4edf5e4a6 = $(`<div id="html_dd0f9f7ad5d3ccb8de3c96b4edf5e4a6" style="width: 100.0%; height: 100.0%;">                 <div style='font-family:monospace;background:#0d1b2a;color:#e0e0e0;padding:12px;border-radius:6px;min-width:220px;border:1px solid #ffcc00'>                     <b style='color:#ffcc00'>🇮🇷 Tehran, Iran</b><br><br>                     <span style='color:#aaa'>Attacker IP:</span> <span style='color:#00aaff'>10.0.0.99</span><br>                     <span style='color:#aaa'>Attacks:</span> <span style='color:#ffcc00'>5</span><br>                     <span style='color:#aaa'>Max Score:</span> <span style='color:#ffcc00'>40/100</span><br>                     <span style='color:#aaa'>Severity:</span> <span style='color:#ffcc00'>MEDIUM</span><br>                     <span style='color:#aaa'>Types:</span> Port Scan                 </div>             </div>`)[0];
+                popup_09e919f0564a004ff7e5220456af473e.setContent(html_dd0f9f7ad5d3ccb8de3c96b4edf5e4a6);
+            
+        
+
+        circle_marker_502aa6971393d28d9e3a74baf7925904.bindPopup(popup_09e919f0564a004ff7e5220456af473e)
+        ;
+
+        
+    
+    
+            circle_marker_502aa6971393d28d9e3a74baf7925904.bindTooltip(
+                `<div>
+                     🇮🇷 Iran — MEDIUM (5 attacks)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_7d7a025122c68d01ed4a40dfe1278714 = L.polyline(
+                [[35.6892, 51.389], [33.6844, 73.0479]],
+                {"bubblingMouseEvents": true, "color": "#ffcc00", "dashArray": "5 5", "dashOffset": null, "fill": false, "fillColor": "#ffcc00", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.5, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_cb5e15f3300754ab7909056dbe048e2b);
+        
+    
+            var circle_marker_2a4c5398da5d846267b62cd76db67a1e = L.circleMarker(
+                [-23.5505, -46.6333],
+                {"bubblingMouseEvents": true, "color": "#ffcc00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffcc00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 2}
+            ).addTo(map_cb5e15f3300754ab7909056dbe048e2b);
+        
+    
+        var popup_cb966a35b6fbf68d2b08cdf92d082e1e = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_058ec8a08f6e24bcacb3817ce431122b = $(`<div id="html_058ec8a08f6e24bcacb3817ce431122b" style="width: 100.0%; height: 100.0%;">                 <div style='font-family:monospace;background:#0d1b2a;color:#e0e0e0;padding:12px;border-radius:6px;min-width:220px;border:1px solid #ffcc00'>                     <b style='color:#ffcc00'>🇧🇷 Sao Paulo, Brazil</b><br><br>                     <span style='color:#aaa'>Attacker IP:</span> <span style='color:#00aaff'>192.168.1.77</span><br>                     <span style='color:#aaa'>Attacks:</span> <span style='color:#ffcc00'>5</span><br>                     <span style='color:#aaa'>Max Score:</span> <span style='color:#ffcc00'>55/100</span><br>                     <span style='color:#aaa'>Severity:</span> <span style='color:#ffcc00'>MEDIUM</span><br>                     <span style='color:#aaa'>Types:</span> Phishing                 </div>             </div>`)[0];
+                popup_cb966a35b6fbf68d2b08cdf92d082e1e.setContent(html_058ec8a08f6e24bcacb3817ce431122b);
+            
+        
+
+        circle_marker_2a4c5398da5d846267b62cd76db67a1e.bindPopup(popup_cb966a35b6fbf68d2b08cdf92d082e1e)
+        ;
+
+        
+    
+    
+            circle_marker_2a4c5398da5d846267b62cd76db67a1e.bindTooltip(
+                `<div>
+                     🇧🇷 Brazil — MEDIUM (5 attacks)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_1feec512c503525fbff59b475157a545 = L.polyline(
+                [[-23.5505, -46.6333], [33.6844, 73.0479]],
+                {"bubblingMouseEvents": true, "color": "#ffcc00", "dashArray": "5 5", "dashOffset": null, "fill": false, "fillColor": "#ffcc00", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.5, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_cb5e15f3300754ab7909056dbe048e2b);
+        
+    
+            var circle_marker_d22796c05a93a3a2c29b2d33538a79be = L.circleMarker(
+                [33.6844, 73.0479],
+                {"bubblingMouseEvents": true, "color": "#ff6600", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff6600", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 2}
+            ).addTo(map_cb5e15f3300754ab7909056dbe048e2b);
+        
+    
+        var popup_9ed4f1ce8ce434d46ff4e0c191ca9294 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_38f3fb0b9c820434e7d81491d55eec3b = $(`<div id="html_38f3fb0b9c820434e7d81491d55eec3b" style="width: 100.0%; height: 100.0%;">                 <div style='font-family:monospace;background:#0d1b2a;color:#e0e0e0;padding:12px;border-radius:6px;min-width:220px;border:1px solid #ff6600'>                     <b style='color:#ff6600'>🇵🇰 Islamabad, Pakistan</b><br><br>                     <span style='color:#aaa'>Attacker IP:</span> <span style='color:#00aaff'>192.168.221.128</span><br>                     <span style='color:#aaa'>Attacks:</span> <span style='color:#ff6600'>5</span><br>                     <span style='color:#aaa'>Max Score:</span> <span style='color:#ff6600'>85/100</span><br>                     <span style='color:#aaa'>Severity:</span> <span style='color:#ff6600'>HIGH</span><br>                     <span style='color:#aaa'>Types:</span> Port Scan (Nmap -sS -sV), Brute Force Login (Hydra), SQL Injection (SQLMap)                 </div>             </div>`)[0];
+                popup_9ed4f1ce8ce434d46ff4e0c191ca9294.setContent(html_38f3fb0b9c820434e7d81491d55eec3b);
+            
+        
+
+        circle_marker_d22796c05a93a3a2c29b2d33538a79be.bindPopup(popup_9ed4f1ce8ce434d46ff4e0c191ca9294)
+        ;
+
+        
+    
+    
+            circle_marker_d22796c05a93a3a2c29b2d33538a79be.bindTooltip(
+                `<div>
+                     🇵🇰 Pakistan — HIGH (5 attacks)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_a16696812b4be975621d8238a220d1fc = L.polyline(
+                [[33.6844, 73.0479], [33.6844, 73.0479]],
+                {"bubblingMouseEvents": true, "color": "#ff6600", "dashArray": "5 5", "dashOffset": null, "fill": false, "fillColor": "#ff6600", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.5, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_cb5e15f3300754ab7909056dbe048e2b);
+        
+    
+            var circle_marker_2f2e5e0a3b126447daa429d6645a44e5 = L.circleMarker(
+                [52.52, 13.405],
+                {"bubblingMouseEvents": true, "color": "#ff6600", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff6600", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_cb5e15f3300754ab7909056dbe048e2b);
+        
+    
+        var popup_6b8e6c5c27a6e22485be0764aa321f8e = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_56474324e5f68d70770d38cb0c74ddf8 = $(`<div id="html_56474324e5f68d70770d38cb0c74ddf8" style="width: 100.0%; height: 100.0%;">                 <div style='font-family:monospace;background:#0d1b2a;color:#e0e0e0;padding:12px;border-radius:6px;min-width:220px;border:1px solid #ff6600'>                     <b style='color:#ff6600'>🇩🇪 Berlin, Germany</b><br><br>                     <span style='color:#aaa'>Attacker IP:</span> <span style='color:#00aaff'>159.31.24.96</span><br>                     <span style='color:#aaa'>Attacks:</span> <span style='color:#ff6600'>1</span><br>                     <span style='color:#aaa'>Max Score:</span> <span style='color:#ff6600'>85/100</span><br>                     <span style='color:#aaa'>Severity:</span> <span style='color:#ff6600'>HIGH</span><br>                     <span style='color:#aaa'>Types:</span> DDoS Attack                 </div>             </div>`)[0];
+                popup_6b8e6c5c27a6e22485be0764aa321f8e.setContent(html_56474324e5f68d70770d38cb0c74ddf8);
+            
+        
+
+        circle_marker_2f2e5e0a3b126447daa429d6645a44e5.bindPopup(popup_6b8e6c5c27a6e22485be0764aa321f8e)
+        ;
+
+        
+    
+    
+            circle_marker_2f2e5e0a3b126447daa429d6645a44e5.bindTooltip(
+                `<div>
+                     🇩🇪 Germany — HIGH (1 attacks)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_48b384d834d41fdb699c5a81bb05581f = L.polyline(
+                [[52.52, 13.405], [33.6844, 73.0479]],
+                {"bubblingMouseEvents": true, "color": "#ff6600", "dashArray": "5 5", "dashOffset": null, "fill": false, "fillColor": "#ff6600", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.5, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_cb5e15f3300754ab7909056dbe048e2b);
+        
+    
+            var circle_marker_b724deee35bd22fa3d1423b383f333b5 = L.circleMarker(
+                [52.3676, 4.9041],
+                {"bubblingMouseEvents": true, "color": "#ff6600", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff6600", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_cb5e15f3300754ab7909056dbe048e2b);
+        
+    
+        var popup_914dc92c0c2d4088c01f443c4579830f = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_9701b16d1491a2da4d1d3681c1da98e0 = $(`<div id="html_9701b16d1491a2da4d1d3681c1da98e0" style="width: 100.0%; height: 100.0%;">                 <div style='font-family:monospace;background:#0d1b2a;color:#e0e0e0;padding:12px;border-radius:6px;min-width:220px;border:1px solid #ff6600'>                     <b style='color:#ff6600'>🇳🇱 Amsterdam, Netherlands</b><br><br>                     <span style='color:#aaa'>Attacker IP:</span> <span style='color:#00aaff'>159.52.240.231</span><br>                     <span style='color:#aaa'>Attacks:</span> <span style='color:#ff6600'>1</span><br>                     <span style='color:#aaa'>Max Score:</span> <span style='color:#ff6600'>85/100</span><br>                     <span style='color:#aaa'>Severity:</span> <span style='color:#ff6600'>HIGH</span><br>                     <span style='color:#aaa'>Types:</span> DDoS Attack                 </div>             </div>`)[0];
+                popup_914dc92c0c2d4088c01f443c4579830f.setContent(html_9701b16d1491a2da4d1d3681c1da98e0);
+            
+        
+
+        circle_marker_b724deee35bd22fa3d1423b383f333b5.bindPopup(popup_914dc92c0c2d4088c01f443c4579830f)
+        ;
+
+        
+    
+    
+            circle_marker_b724deee35bd22fa3d1423b383f333b5.bindTooltip(
+                `<div>
+                     🇳🇱 Netherlands — HIGH (1 attacks)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_c2f9c545c89c27ed0acbf96e91b1731f = L.polyline(
+                [[52.3676, 4.9041], [33.6844, 73.0479]],
+                {"bubblingMouseEvents": true, "color": "#ff6600", "dashArray": "5 5", "dashOffset": null, "fill": false, "fillColor": "#ff6600", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.5, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_cb5e15f3300754ab7909056dbe048e2b);
+        
+    
+            var circle_marker_98dc810d9e34dffe92d96840159cafab = L.circleMarker(
+                [50.4501, 30.5234],
+                {"bubblingMouseEvents": true, "color": "#ff6600", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff6600", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_cb5e15f3300754ab7909056dbe048e2b);
+        
+    
+        var popup_a1d2a512a1d914cb317618cf2274d148 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_60a6c76d306651b145f8babfc6192995 = $(`<div id="html_60a6c76d306651b145f8babfc6192995" style="width: 100.0%; height: 100.0%;">                 <div style='font-family:monospace;background:#0d1b2a;color:#e0e0e0;padding:12px;border-radius:6px;min-width:220px;border:1px solid #ff6600'>                     <b style='color:#ff6600'>🇺🇦 Kyiv, Ukraine</b><br><br>                     <span style='color:#aaa'>Attacker IP:</span> <span style='color:#00aaff'>242.93.97.12</span><br>                     <span style='color:#aaa'>Attacks:</span> <span style='color:#ff6600'>1</span><br>                     <span style='color:#aaa'>Max Score:</span> <span style='color:#ff6600'>85/100</span><br>                     <span style='color:#aaa'>Severity:</span> <span style='color:#ff6600'>HIGH</span><br>                     <span style='color:#aaa'>Types:</span> DDoS Attack                 </div>             </div>`)[0];
+                popup_a1d2a512a1d914cb317618cf2274d148.setContent(html_60a6c76d306651b145f8babfc6192995);
+            
+        
+
+        circle_marker_98dc810d9e34dffe92d96840159cafab.bindPopup(popup_a1d2a512a1d914cb317618cf2274d148)
+        ;
+
+        
+    
+    
+            circle_marker_98dc810d9e34dffe92d96840159cafab.bindTooltip(
+                `<div>
+                     🇺🇦 Ukraine — HIGH (1 attacks)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_7b1c26c42c1b4b90c185032c93e3628a = L.polyline(
+                [[50.4501, 30.5234], [33.6844, 73.0479]],
+                {"bubblingMouseEvents": true, "color": "#ff6600", "dashArray": "5 5", "dashOffset": null, "fill": false, "fillColor": "#ff6600", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.5, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_cb5e15f3300754ab7909056dbe048e2b);
+        
+</script>
+</html>

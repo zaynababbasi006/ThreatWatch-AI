@@ -1,0 +1,29 @@
+[
+    {
+        "ip": "192.168.221.129",
+        "hostname": "OWASPBWA",
+        "is_alive": true,
+        "open_ports": [
+            22,
+            80,
+            139,
+            143,
+            443,
+            445,
+            8080,
+            8081
+        ],
+        "risk_score": 74,
+        "severity": "HIGH",
+        "scanned_at": "2026-05-29 16:36:32"
+    },
+    {
+        "ip": "192.168.221.128",
+        "hostname": "Unknown",
+        "is_alive": true,
+        "open_ports": [],
+        "risk_score": 0,
+        "severity": "LOW",
+        "scanned_at": "2026-05-29 16:38:10"
+    }
+]

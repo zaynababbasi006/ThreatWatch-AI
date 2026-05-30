@@ -243,5 +243,47 @@
         "threat_type": "DDoS Attack",
         "risk_score": 85,
         "action_taken": "IP Blocked"
+    },
+    {
+        "timestamp": "2026-05-30 10:25:37",
+        "ip_address": "192.168.1.105",
+        "threat_type": "DDoS Attack",
+        "risk_score": 85,
+        "action_taken": "IP Blocked"
+    },
+    {
+        "timestamp": "2026-05-30 10:25:37",
+        "ip_address": "10.0.0.44",
+        "threat_type": "Brute Force Login",
+        "risk_score": 60,
+        "action_taken": "Alert Sent"
+    },
+    {
+        "timestamp": "2026-05-30 10:25:37",
+        "ip_address": "172.16.8.22",
+        "threat_type": "SQL Injection",
+        "risk_score": 75,
+        "action_taken": "IP Blocked"
+    },
+    {
+        "timestamp": "2026-05-30 10:25:37",
+        "ip_address": "192.168.1.200",
+        "threat_type": "Ransomware",
+        "risk_score": 100,
+        "action_taken": "IP Blocked"
+    },
+    {
+        "timestamp": "2026-05-30 10:25:37",
+        "ip_address": "10.0.0.99",
+        "threat_type": "Port Scan",
+        "risk_score": 40,
+        "action_taken": "Alert Sent"
+    },
+    {
+        "timestamp": "2026-05-30 10:25:37",
+        "ip_address": "192.168.1.77",
+        "threat_type": "Phishing",
+        "risk_score": 55,
+        "action_taken": "Alert Sent"
     }
 ]
