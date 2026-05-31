@@ -1,0 +1,42 @@
+[
+    {
+        "type": "ip",
+        "target": "192.168.221.129",
+        "country": "Unknown",
+        "owner": "Unknown",
+        "malicious": 0,
+        "suspicious": 0,
+        "total": 91,
+        "severity": "CLEAN",
+        "scanned_at": "2026-05-30 17:17:14"
+    },
+    {
+        "type": "ip",
+        "target": "8.8.8.8",
+        "country": "US",
+        "owner": "Google LLC",
+        "malicious": 0,
+        "suspicious": 0,
+        "total": 91,
+        "severity": "CLEAN",
+        "scanned_at": "2026-05-30 17:17:27"
+    },
+    {
+        "type": "domain",
+        "target": "malware.wicar.org",
+        "malicious": 14,
+        "suspicious": 1,
+        "total": 91,
+        "severity": "MEDIUM",
+        "scanned_at": "2026-05-30 17:18:59"
+    },
+    {
+        "type": "hash",
+        "target": "44d88612fea8a8f36de82e1278abb02f",
+        "malicious": 66,
+        "suspicious": 0,
+        "total": 68,
+        "severity": "CRITICAL",
+        "scanned_at": "2026-05-31 16:55:18"
+    }
+]
